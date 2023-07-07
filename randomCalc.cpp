@@ -1,16 +1,13 @@
 #include "randomNumberGen.h"
+#include "audioOutput.h"
 #include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <map>
 #include <string>
 #include <vector>
-#include <SFML/Audio.hpp>
-#include <chrono>
-#include <thread>
 
-//TODO: Export random numbers
-//TODO: Audio
+//TODO: Export Output
 
 void printVector(std::vector<int> vector){
 	for (int n : vector)
@@ -19,17 +16,21 @@ void printVector(std::vector<int> vector){
 }
 
 int main() {
-	sf::SoundBuffer buffer;
-	sf::Sound sound;
-    if (!buffer.loadFromFile("tts/geteilt.mp3.wav"))
-        return -1;
-    sound.setBuffer(buffer);
-    sound.play();
-    while(sound.getStatus() == 2){
-    	std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
+	audioOutput audioOutputInst;
+	audioOutputInst.sendAudio_1();
+	audioOutputInst.sendAudio_2();
+	audioOutputInst.sendAudio_3();
+	audioOutputInst.sendAudio_4();
+	audioOutputInst.sendAudio_5();
+	audioOutputInst.sendAudio_6();
+	audioOutputInst.sendAudio_7();
+	audioOutputInst.sendAudio_8();
+	audioOutputInst.sendAudio_9();
+	audioOutputInst.sendAudio_plus();
+	audioOutputInst.sendAudio_minus();
+	audioOutputInst.sendAudio_mal();
+	audioOutputInst.sendAudio_geteilt();
 
-	// Seed with a real random value, if available
 	uint number_max = 9;
 	randomNumberGen randomNumberGenInst(number_max);
 
@@ -50,12 +51,6 @@ int main() {
 		}
 		if (numbers.size() > 0) {
 			tasks_count = 0;
-
-			// print
-			for (uint i = 0; i < number_count; i++) {
-				std::cout << "Randomly-chosen Number " << i << ": " << numbers.at(i)
-						<< std::endl;
-			}
 
 			std::cout << numbers.at(0);
 			for (uint i = 1; i < number_count; i++) {
