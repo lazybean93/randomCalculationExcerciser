@@ -21,23 +21,16 @@ int main() {
 	randomNumberGen randomNumberGenInst(number_max);
 
 	uint tasks_count = 1;
-	uint number_count = 4 * tasks_count;
+	uint number_count = 40 * tasks_count;
 	uint mathematical_operations_count = number_count - tasks_count;
 
 	std::vector < int > numbers;
 	while (tasks_count > 0) {
-		//first number must be positive
-		//get first number
-		int res = randomNumberGenInst.getNumber();
-		//negative number = try again
-		if (res < 0){
-			continue;
-		}
-		numbers.push_back(res);
-		for (uint i = 1; i < number_count; i++) {
+		int res = 0;
+		for (uint i = 0; i < number_count; i++) {
 			numbers.push_back(randomNumberGenInst.getNumber());
 			res += numbers.at(i);
-			if (res < 0){
+			if (res < 1 || numbers.at(i) == 0){
 				numbers.clear();
 				break;
 			}
