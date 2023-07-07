@@ -5,6 +5,9 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <SFML/Audio.hpp>
+#include <chrono>
+#include <thread>
 
 //TODO: Export random numbers
 //TODO: Audio
@@ -16,6 +19,16 @@ void printVector(std::vector<int> vector){
 }
 
 int main() {
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
+    if (!buffer.loadFromFile("tts/geteilt.mp3.wav"))
+        return -1;
+    sound.setBuffer(buffer);
+    sound.play();
+    while(sound.getStatus() == 2){
+    	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
 	// Seed with a real random value, if available
 	uint number_max = 9;
 	randomNumberGen randomNumberGenInst(number_max);
