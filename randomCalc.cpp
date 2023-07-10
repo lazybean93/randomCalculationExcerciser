@@ -15,21 +15,15 @@ void printVector(std::vector<int> vector) {
 	std::cout << std::endl;
 }
 
-int main(int argc, char *argv[]) {
-
-	uint number_max = 9;
+int singleTask(int number_count, int number_max) {
 	randomNumberGen randomNumberGenInst(number_max);
 
-	uint tasks_count = 1;
-	uint number_count = 3;
+	uint finished = 1;
+	int res;
+	while (finished > 0) {
+		res = 0;
+		std::vector<int> numbers;
 
-	if (argc > 1) {
-		number_count = atoi(argv[1]);
-	}
-
-	std::vector<int> numbers;
-	while (tasks_count > 0) {
-		int res = 0;
 		for (uint i = 0; i < number_count; i++) {
 			numbers.push_back(randomNumberGenInst.getNumber());
 			res += numbers.at(i);
@@ -39,7 +33,7 @@ int main(int argc, char *argv[]) {
 			}
 		}
 		if (numbers.size() > 0) {
-			tasks_count = 0;
+			finished = 0;
 
 			output outputInst;
 			outputInst.equation(numbers, number_count);
@@ -54,4 +48,26 @@ int main(int argc, char *argv[]) {
 			}
 		}
 	}
+	return res;
+}
+
+int main(int argc, char *argv[]) {
+
+	uint number_max = 9;
+
+	uint number_count = 3;
+
+	uint task_count = 2;
+
+	if (argc > 1) {
+		number_count = atoi(argv[1]);
+	}
+
+	std::vector<int> task;
+	for (int i=0;i<2;i++){
+		task.push_back(singleTask(number_count, number_max));
+	}
+
+	printVector(task);
+
 }
