@@ -7,8 +7,6 @@
 #include <string>
 #include <vector>
 
-//TODO: Export Output
-
 void printVector(std::vector<int> vector) {
 	for (int n : vector)
 		std::cout << n << ", ";
@@ -53,23 +51,9 @@ int singleTask(int number_count, int number_max) {
 	return res;
 }
 
-int main(int argc, char *argv[]) {
-
-	uint number_max = 9;
-
-	uint number_count = 3;
-
-	uint task_count = 2;
-
-	if (argc > 1) {
-		number_count = atoi(argv[1]);
-	}
-	if (argc > 2) {
-		task_count = atoi(argv[2]);
-	}
-
+void loop(uint task_count, uint number_count, uint number_max) {
 	int res = 0;
-	for (int i = 0; i < task_count; i++) {
+	for (uint i = 0; i < task_count; i++) {
 		int task = singleTask(number_count, number_max);
 		if ((res - task) > 0) {
 			res = res - task;
@@ -85,5 +69,31 @@ int main(int argc, char *argv[]) {
 		std::cout << "Richtig!" << std::endl;
 	} else {
 		std::cout << "Falsch! Richtig wäre " << res << "." << std::endl;
+	}
+}
+
+int main(int argc, char *argv[]) {
+
+	uint number_max = 9;
+
+	uint number_count = 3;
+
+	uint task_count = 2;
+
+	uint loop_count = 2;
+
+	if (argc > 1) {
+		loop_count = atoi(argv[1]);
+	}
+	if (argc > 2) {
+		number_count = atoi(argv[2]);
+	}
+	if (argc > 3) {
+		task_count = atoi(argv[3]);
+	}
+
+	for (uint i = 0; i < loop_count; i++){
+		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+		loop(task_count, number_count, number_max);
 	}
 }
