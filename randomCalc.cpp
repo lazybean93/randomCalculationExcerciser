@@ -42,9 +42,11 @@ int singleTask(int number_count, int number_max) {
 			int calc;
 			std::cin >> calc;
 			if (calc == res) {
+				outputInst.putout(" ");
 				std::cout << "Richtig!" << std::endl;
 			} else {
 				std::cout << "Falsch! Richtig wäre " << res << "." << std::endl;
+				exit(1);
 			}
 		}
 	}
@@ -62,12 +64,26 @@ int main(int argc, char *argv[]) {
 	if (argc > 1) {
 		number_count = atoi(argv[1]);
 	}
-
-	std::vector<int> task;
-	for (int i=0;i<2;i++){
-		task.push_back(singleTask(number_count, number_max));
+	if (argc > 2) {
+		task_count = atoi(argv[2]);
 	}
 
-	printVector(task);
+	int res = 0;
+	for (int i = 0; i < task_count; i++) {
+		int task = singleTask(number_count, number_max);
+		if ((res - task) > 0) {
+			res = res - task;
+		} else {
+			res = res + task;
+		}
+	}
+	std::cout << "=";
 
+	int calc;
+	std::cin >> calc;
+	if (calc == res) {
+		std::cout << "Richtig!" << std::endl;
+	} else {
+		std::cout << "Falsch! Richtig wäre " << res << "." << std::endl;
+	}
 }

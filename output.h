@@ -23,7 +23,9 @@ public:           // Access specifier
 	}
 
 	void putout(std::string out) {
-		std::cout << out;
+		for (int i = 0; i<100;i++)
+			std::cout << std::endl;
+		//std::cout << out;
 		if (out == "1") {
 			audioOutputInst.sendAudio_1();
 		}
