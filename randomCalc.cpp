@@ -83,20 +83,11 @@ int main(int argc, char *argv[]) {
 	uint number_max = 9;
 
 	uint number_count = 3;
-
 	uint task_count = 2;
+	uint loop_count;
 
-	uint loop_count = 2;
-
-	if (argc > 1) {
-		loop_count = atoi(argv[1]);
-	}
-	if (argc > 2) {
-		number_count = atoi(argv[2]);
-	}
-	if (argc > 3) {
-		task_count = atoi(argv[3]);
-	}
+	std::cout << "Anzahl der Wiederholungen: ";
+	std::cin >> loop_count;
 
 	for (uint i = 0; i < loop_count; i++){
 		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
