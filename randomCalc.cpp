@@ -30,6 +30,8 @@ int singleTask(int number_count, int number_max) {
 				break;
 			}
 		}
+
+		bool correct = false; //variable to memorize correctness of result
 		if (numbers.size() > 0) {
 			finished = 0;
 
@@ -39,13 +41,17 @@ int singleTask(int number_count, int number_max) {
 
 			int calc;
 			std::cin >> calc;
+
 			if (calc == res) {
+				correct = true;
 				outputInst.putout(" ");
 				std::cout << "Richtig!" << std::endl;
 			} else {
 				std::cout << "Falsch! Richtig wäre " << res << "." << std::endl;
-				exit(1);
 			}
+		}
+		if (numbers.size() > 0 && correct == false){
+			exit(1);
 		}
 	}
 	return res;
